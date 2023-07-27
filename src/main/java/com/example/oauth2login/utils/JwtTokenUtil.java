@@ -35,7 +35,7 @@ public class JwtTokenUtil {
         Date expiryDate = new Date(now.getTime() + expiration);
 
         // google, kakao ...
-        String clientRegistrationId = getClientRegistrationId(authentication);
+        String clientRegistrationId = getRegistrationIdFromAuthentic(authentication);
 
         return Jwts.builder()
                 .setSubject(authentication.getName())
@@ -52,7 +52,8 @@ public class JwtTokenUtil {
         return claims.getBody().getSubject();
     }
 
-    public String getRegistrationId(String token) {
+    // JWT 토큰으로부터 registrationId 추출 (google, kakao)
+    public String getRegistrationIdFromToken(String token) {
         Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
         return (String) claims.getBody().get("registration_id");
     }
@@ -67,8 +68,8 @@ public class JwtTokenUtil {
         }
     }
 
-
-    private String getClientRegistrationId(Authentication authentication) {
+    // RegistrationId 를 얻기 위한 메서드 (From. Authentic)
+    private String getRegistrationIdFromAuthentic(Authentication authentication) {
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         return oauthToken.getAuthorizedClientRegistrationId();
     }

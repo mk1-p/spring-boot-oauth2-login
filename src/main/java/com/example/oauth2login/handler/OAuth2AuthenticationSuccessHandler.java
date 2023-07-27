@@ -23,11 +23,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 @Slf4j
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
-    private ObjectMapper objectMapper = new ObjectMapper();
     private final JwtTokenUtil jwtTokenUtil;
-//    private final OAuth2AuthorizedClientService authorizedClientService;
-
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

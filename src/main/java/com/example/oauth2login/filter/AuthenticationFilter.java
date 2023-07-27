@@ -55,7 +55,7 @@ public class AuthenticationFilter extends GenericFilterBean {
 
             // 토큰에서 Member 조회를 위한 값 추출
             String attributeId = jwtTokenUtil.getUserIdFromToken(bearerToken);
-            String registrationId = jwtTokenUtil.getRegistrationId(bearerToken);
+            String registrationId = jwtTokenUtil.getRegistrationIdFromToken(bearerToken);
             // 등록된 Member 조회
             Member member = memberRepository.findByAttributeIdAndRegistrationId(attributeId, registrationId)
                     .orElseThrow(() -> new RuntimeException("Bearer Token 인증 실패!!"));
