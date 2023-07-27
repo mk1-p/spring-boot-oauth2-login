@@ -4,10 +4,8 @@ package com.example.oauth2login.dto;
 import com.example.oauth2login.model.Role;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.SneakyThrows;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Map;
 
@@ -15,14 +13,14 @@ import java.util.Map;
 @ToString
 @Slf4j
 public class OAuthAttributes {
-    private Map<String, Object> attributes;
-    private String nameAttributeKey;
-    private String attributeId;
+    private Map<String, Object> attributes;     // Attributes 원본
+    private String nameAttributeKey;            // attribute key : google(sub), kakao(id)
+    private String attributeId;                 // 고유 id
     private String name;
     private String email;
     private String picture;
-    private String registrationId;
-    private Role role;
+    private String registrationId;              // 간편로그인 서비스 구분 (ex : google, kakao)
+    private Role role;                          // 권한 값
 
     @Builder
     public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey,
@@ -64,9 +62,9 @@ public class OAuthAttributes {
     }
     private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes, String registrationId) {
 
-        // 카카오로 받은 데이터에서 계정 정보가 담긴 kakao_account 값을 꺼낸다.
+        // 카카오의 계정 정보 추출
         Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
-        // 마찬가지로 profile(nickname, image_url.. 등) 정보가 담긴 값을 꺼낸다.
+        // 카카오의 프로필 정보 추출
         Map<String, Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
 
         return OAuthAttributes.builder()
