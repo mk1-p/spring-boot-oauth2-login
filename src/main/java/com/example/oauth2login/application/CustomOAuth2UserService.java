@@ -54,7 +54,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // Member 객체 조회 및 세팅
         Member member = memberRepository.findByAttributeIdAndRegistrationId(attributes.getAttributeId(), attributes.getRegistrationId())
                 .map(entity -> entity.updateNameAndEmail(entity.getName(),entity.getEmail()))
-                .orElse(Member.toEntity(attributes));
+                .orElseGet(() -> Member.toEntity(attributes));
 
         return memberRepository.save(member);
     }
