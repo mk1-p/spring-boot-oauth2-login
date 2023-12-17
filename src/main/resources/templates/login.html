@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <title>JOIN</title>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<div class="login-wrapper">
+  <h2>Login</h2>
+  <form method="post" th:action="@{/login}" id="login-form">
+    <input type="text" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+<!--    <label for="remember-check">-->
+<!--      <input type="checkbox" id="remember-check">아이디 저장하기-->
+<!--    </label>-->
+    <input type="submit" value="Login">
+  </form>
+
+  <hr class="hr-solid"/>
+
+
+  <h2>Social Login</h2>
+
+  <div class="social-buttons">
+    <a th:href="@{/oauth2/authorization/google}">
+      <img src="/images/google/google_login_nomal.png" alt="Login with Google">
+    </a>
+  </div>
+
+  <div class="social-buttons">
+    <a th:href="@{/oauth2/authorization/kakao}">
+      <img src="/images/kakao/kakao_login_large_wide.png" alt="Login with Kakao">
+    </a>
+  </div>
+
+
+</div>>
+
+</body>
+<script src="//code.jquery.com/jquery.min.js"></script>
+
+<!--<script src="/js/login.js"></script>-->
+</html>
